@@ -1,0 +1,68 @@
+<p>update works!</p>
+<input type="text" #searchdata required>
+<button (click)="filterData(searchdata.value)">Search</button>
+<div *ngIf="flag">
+
+    <!-- <table class="table table-dark">
+        <td>{{claim.expenseCodeId}}</td>
+        <td>{{claim.employeeId}}</td>
+        <td>{{claim.projectCode}}</td>
+        <td>{{claim.expenseCode}}</td>
+        <td>{{claim.startDate}}</td>
+        <td>{{claim.endDate}}</td>
+        <td>{{claim.expenseAmount}}</td>
+    </table> -->
+
+
+    <div class="container">
+        <form #updateForm=ngForm (ngSubmit)="update()" class="was-validated">
+            <div class="form-group">
+                Expense Code Id:<input type="number" name="expenseCodeId" id="expenseCodeId"
+                    [(ngModel)]="claim.expenseCodeId" #ecid="ngModel" class="form-control" readonly>
+
+            </div>
+            <div class="form-group">
+                Employee Id:<input type="number" name="employeeId" id="employeeId" [(ngModel)]="claim.employeeId"
+                    #eid="ngModel" class="form-control" readonly>
+
+            </div>
+            <div class="form-group">
+                Project Code:<input type="number" name="projectCode" id="projectCode" [(ngModel)]="claim.projectCode"
+                    #pcode="ngModel" class="form-control" required pattern="[0-9]{1,}">
+                <span *ngIf="pcode.touched&&pcode.errors?.required" class="invalid-feedback">Project Code is
+                    required</span>
+                <span *ngIf="pcode.dirty&&pcode.errors?.email" class="alert alert-danger">Invalid Project Code</span>
+            </div>
+            <div class="form-group">
+                Expense Code:<input type="number" name="expenseCode" id="expenseCode" [(ngModel)]="claim.expenseCode"
+                    #ecode="ngModel" class="form-control" required pattern="[0-9]{1,}">
+                <span *ngIf="ecode.touched&&ecode.errors?.required" class="invalid-feedback">Expense Code is
+                    required</span>
+                <span *ngIf="ecode.dirty&&ecode.errors?.pattern" class="alert alert-danger">Invalid Expense Code</span>
+            </div>
+            <div class="form-group">
+                Start Date:<input type="date" name="startDate" id="startDate" [(ngModel)]="claim.startDate"
+                    #sdate="ngModel" class="form-control">
+                <span *ngIf="sdate.touched&&sdate.errors?.required" class="invalid-feedback">Start Date is
+                    required</span>
+                <span *ngIf="sdate.dirty&&sdate.errors?.pattern" class="alert alert-danger">Invalid Start Date</span>
+            </div>
+            <div class="form-group">
+                End Date:<input type="date" name="endDate" id="endDate" [(ngModel)]="claim.endDate" #edate="ngModel"
+                    class="form-control" (blur)="compare()">
+                <span *ngIf="edate.touched&&edate.errors?.required" class="invalid-feedback">End Date is required</span>
+                <span *ngIf="edate.dirty&&edate.errors?.pattern" class="alert alert-danger">Invalid End Date</span>
+            </div>
+            <div class="form-group">
+                Expense Amount:<input type="number" name="expenseAmount" id="expenseAmount"
+                    [(ngModel)]="claim.expenseAmount" #amt="ngModel" class="form-control" required pattern="[0-9]{1,}">
+                <span *ngIf="amt.touched&&amt.errors?.required" class="invalid-feedback">Expense Amount is
+                    required</span>
+                <span *ngIf="amt.dirty&&amt.errors?.pattern" class="alert alert-danger">Invalid Amount</span>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </form>
+
+    </div>
+</div>
